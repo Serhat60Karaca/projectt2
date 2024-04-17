@@ -1,0 +1,42 @@
+# Database: postgres
+version: "3.1"
+
+services:
+
+  database:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "mysecretpassword"
+    ports:
+      - "5432:5432"
+    networks:
+      - sbnet
+
+  devops-gradle:
+    image: serhatkaraca60/projectt2:latest
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: "mysecretpassword!"
+      SPRING_JPA_DATABASE: postgresql
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_OPEN_IN_VIEW: false
+    networks:
+      - sbnet
+
+volumes:
+  postgres_data:
+    external: true
+
+networks:
+  sbnet:
+    external: true
