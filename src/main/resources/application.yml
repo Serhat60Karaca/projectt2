@@ -1,0 +1,17 @@
+
+# This file is used to configure the application properties.
+spring:
+  application:
+    name: projectt2
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/cr"
+    username: postgres
+    password: mysecretpassword
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:src/main/resources/static/
