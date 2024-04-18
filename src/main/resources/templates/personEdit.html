@@ -37,7 +37,7 @@
 
 <div class="container my-5 p-5" style="border:1px solid black;">
     <h4 class="text-center">Edit person Here</h4>
-    <form class="col-md-4 offset-md-4" th:action="@{/save}" method="post" th:object="${person}">
+    <form class="col-md-4 offset-md-4" th:action="@{/updateUser}" method="post" th:object="${person}" enctype="multipart/form-data">
 
         <input type="hidden" name="id" th:value="${person.id}"/>
         <div class="mb-3">
@@ -55,7 +55,10 @@
 
             <img th:src="@{/images/__${person.Id}__-__${person.image}__}" style="width: 100%" />
         </div>
-
+        <div>
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control"  id="image" name="image" >
+        </div>
         <center><button type="submit" class="btn btn-primary">Submit</button></center>
     </form>
 </div>

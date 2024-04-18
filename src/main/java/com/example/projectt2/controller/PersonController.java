@@ -81,4 +81,24 @@ public class PersonController {
             return "error";
         }
     }
+
+    @PostMapping("/updateUser")
+    public String updateUser(@RequestParam("name") String name,
+                             @RequestParam("address") String address,
+                             @RequestParam("id") int id,
+                             @RequestParam("image") MultipartFile image) throws IOException {
+        Person b = service.getPersonById(id);
+        String originalFilename = image.getOriginalFilename();
+        Path cleanPath = Paths.get(originalFilename).normalize();
+        String fileName = cleanPath.toString().replaceAll("\\s", "");
+        b.setName(name);
+        b.setAddress(address);
+        b.setImage(fileName);
+        service.save(b);
+        String uploadDir = "src/main/resources/static/images/";
+
+        fileName = b.getId() + "-" + fileName;
+        FileUploadUtil.saveFile(uploadDir, fileName, image);
+        return "redirect:/person";
+    }
 }
