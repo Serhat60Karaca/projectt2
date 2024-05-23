@@ -12,6 +12,9 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:src/main/resources/static/
 
 
 server:

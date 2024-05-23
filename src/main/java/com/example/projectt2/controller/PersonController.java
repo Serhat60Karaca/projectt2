@@ -4,6 +4,8 @@ import com.example.projectt2.entity.Person;
 import com.example.projectt2.service.PersonService;
 import com.example.projectt2.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +71,11 @@ public class PersonController {
         service.deleteById(id);
         return "redirect:/person";
     }
+
+    //@GetMapping("/view-(filename)")
+   // public ResponseEntity<InputStreamResource> deletePerson(@PathVariable("filename") String filename) {
+     //   return "redirect:/person";
+    //}
 
     @GetMapping("/editPerson/{id}")
     public String editPerson(@PathVariable("id") int id, Model model) {

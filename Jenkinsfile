@@ -4,10 +4,6 @@ pipeline {
         gradle 8.7
     }
 
-    triggers {
-        pollSCM '/5 * * *'
-    }
-
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('DockerAuth')
         DOCKER_IMAGE = "serhatkaraca60/projectt2"
